@@ -1,0 +1,43 @@
+* { background: #fff; }
+
+body {
+	font-family: Georgia, 'Times New Roman', serif;
+	width: 100%;
+}
+
+article,
+section,
+nav {
+	color: #444;
+}
+
+a:link:after {
+	content: " (" attr(href) ") ";
+	font-size: 75%;
+	font-style: italic;
+}
+
+a:link {
+	color: #06c;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+p { 
+	font-size: 12pt;
+	line-height: 1.3;
+}
+
+nav,
+aside,
+body > footer,
+section#comments-wrapper { display: none; }
+
+body.page-template aside + section,
+body.archive aside + section,
+aside + section {
+	float: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
