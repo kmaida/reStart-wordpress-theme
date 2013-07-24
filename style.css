@@ -1,10 +1,10 @@
 /*
-Theme Name: KM-H5 v2
-Theme URI: http://blog.kim-maida.com/web-development/wordpress/wordpress-html5-theme
-Description: A bare-bones HTML5 theme intended for customization.
+Theme Name: reStart
+Theme URI: https://github.com/kmaida/reStart-wordpress-theme
+Description: A bare-bones responsive HTML5 theme intended for customization.
 Author: Kim Maida
 Author URI: http://kim-maida.com
-Version: 2
+Version: 1
 Tags: two-columns, threaded-comments, editor-style, custom-menu, sticky-post, post-formats, featured-images, right-sidebar
 
 License: GNU General Public License v2.0
@@ -13,12 +13,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
  
 /*---------------------------------------------------------------------------------------- CSS RESET --*/
- 
-/*
-HTML5 Reset
-Version 1.2
-Author: Kim Maida | http://kim-maida.com
-*/
  
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins,
@@ -152,7 +146,58 @@ a:active {
 	text-decoration: underline;
 }
 
-/*---------------------------------------------------------------------------------------- LAYOUT --*/
+/*---------------------------------------------------------------------------------------- LAYOUT FUNCTION FOR OFF-CANVAS NAVIGATION --*/
+
+.wrapper-overflow {
+	overflow: hidden;
+}
+.nav-global {
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	box-shadow: inset -8px 0 8px -6px rgba(0,0,0,0.2);
+	display: none;	/* deal with FOUC */
+	height: 100%;
+	overflow: hidden;
+	position: absolute;
+		top: 0;
+	-webkit-transform: translate3d(-100%,0,0);
+	-moz-transform: translate3d(-100%,0,0);
+	-o-transform: translate3d(-100%,0,0);
+	transform: translate3d(-100%,0,0);
+	width: 85%;
+}
+.nav-closed .nav-global,
+.nav-open .nav-global {
+	display: block;	/* deal with FOUC */
+}
+	.no-csstransforms3d .nav-closed .nav-global { left: -100%; }
+	.no-csstransforms3d .nav-open .nav-global { left: 0; }
+.wrapper-canvas {
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	position: relative;
+		left: 0;
+	-webkit-transition: -webkit-transform 250ms ease;
+	-moz-transition: -moz-transform 250ms ease;
+	-o-transition: -o-transform 250ms ease;
+	transition: transform 250ms ease;
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	width: 100%;
+}
+	.csstransforms3d .nav-open .wrapper-canvas {
+		-webkit-transform: translate3d(85%,0,0);
+		-moz-transform: translate3d(85%,0,0);
+		-o-transform: translate3d(85%,0,0);
+		transform: translate3d(85%,0,0);
+	}
+	.no-csstransforms3d .nav-open .wrapper-canvas { left: 85%; }
+
+/*---------------------------------------------------------------------------------------- PRESENTATION --*/
 	
 body {
 	font: normal 16px/1.4 Helvetica, Arial, sans-serif;
@@ -175,6 +220,7 @@ nav {
 .header-global {
 	color: #999;
 	padding: 20px 0;
+	text-align: center;
 }
 	.header-global h1 {
 		font-size: 36px;
@@ -188,6 +234,14 @@ nav {
 		.header-global h1 a:active {
 			text-decoration: underline;
 		}
+	.nav-toggle {
+		background: #eee;
+		padding: 16px 0;
+		position: absolute;
+			top: 0; left: 0;
+		text-align: center;
+		width: 15%;
+	}
 		
 /*---- Global Navigation Menu ----*/
 	
@@ -200,11 +254,9 @@ nav {
 	color: #900;
 }
 	.nav-global ul {
-		background: #eee;
 		margin: 0;
 	}	
 		.nav-global li {
-			display: inline-block;
 			font-weight: bold;
 			margin: 10px;
 		}		
@@ -241,16 +293,23 @@ article.sticky {
 	padding: 2px 10px;	
 }
 
-/*---- Additional Required Classes ----*/
+/*---- Additional Formatting Classes ----*/
 
-.wp-caption {}
-p.wp-caption-text {
+.wp-caption,
+.gallery-caption {
+	max-width: 100%;
+}
+.wp-caption img,
+.gallery-caption img {
+	height: auto !important;	/* for responsive functionality: overrides WP's inline statement of height */
+	max-width: 100%;
+}
+.wp-caption-text {
 	color: #999;
 	font-size: 88%;
 	font-style: italic;
 	text-align: center;
 }
-.gallery-caption {}
 
 /*---------------------------------------------------------------------------------------- COMMENTS --*/
 
@@ -451,18 +510,55 @@ input.search-submit {
 
 /*---------------------------------------------------------------------------------------- CSS3 MEDIA QUERIES --*/
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 640px) {
 		
+	/*-- Layout Function --*/
+	
+	.nav-global {
+		display: block;
+		position: relative;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+		transform: none;
+		width: 100%;
+	}
+	.wrapper-canvas,
+	.csstransforms3d .nav-open .wrapper-canvas {
+		-webkit-transition: none;
+		-moz-transition: none;
+		-o-transition: none;
+		transition: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+		transform: none;
+	}
+	.no-csstransforms3d .nav-open .wrapper-canvas {
+		left: 0;
+	}
+	.nav-toggle {
+		display: none;
+	}
+		
+	/*-- Presentation --*/
+		
+	.nav-global .menu > ul {
+		background: #eee;
+	}
+	.nav-global li {
+		display: inline-block;
+	}
 	.main {
 		float: left;
-		max-width: 730px;
-		padding: 10px 30px 10px 0;
+		max-width: 70%;
+		padding: 2% 2% 2% 3%;
 	}	
 	.sidebar-global {
 		clear: none;
 		float: right;
 		margin: 10px 0;
-		width: 230px;
+		width: 30%;
 	}
 	.welcome { display: block; }
 }

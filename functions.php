@@ -5,6 +5,14 @@ load_theme_textdomain ( 'reStart', TEMPLATEPATH.'/lang' );
 
 // enqueue theme's javascript file
 function theme_scripts() {
+	wp_enqueue_script(
+		/* handle */	'modernizr',
+		/* src */		get_stylesheet_directory_uri() . '/js/libs/modernizr.js',
+		/* deps */		'',
+		/* ver */		'2.6.2',
+		/* in footer */	false
+	);
+
 	$jsFile = '/js/script.js';
 
 	wp_enqueue_script(

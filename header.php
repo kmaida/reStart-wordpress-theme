@@ -23,7 +23,7 @@
 			wp_enqueue_script('jquery'); 
 			if ( is_singular() ) wp_enqueue_script( 'comment-reply' );	// only works if placed in the head
 			
-			wp_head(); 
+			wp_head();
 		?>
 
 		<!--[if lt IE 9]>
@@ -32,12 +32,15 @@
 
 	</head>
 	<body <?php body_class(); ?>>
+		<div id="wrapper-overflow" class="wrapper-overflow">
+			<div id="wrapper-canvas" class="wrapper-canvas">
 
-		<header id="header-global" class="header-global">
-			<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo('name'); ?></a></h1>
-			<h2><?php bloginfo('description'); ?></h2>
-		</header>
-		<nav id="nav-global" class="nav-global">
-        	<!-- wp_nav_menu generates a container div with a class of "menu" -->
-			<?php wp_nav_menu('Primary Navigation','title_li='); ?>
-		</nav>
+				<header id="header-global" class="header-global">
+					<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo('name'); ?></a></h1>
+					<h2><?php bloginfo('description'); ?></h2>
+					<a id="nav-toggle" class="nav-toggle" href="#nav-global">Menu</a>
+				</header>
+				<nav id="nav-global" class="nav-global" role="navigation">
+		        	<!-- wp_nav_menu generates a container div with a class of "menu" -->
+					<?php wp_nav_menu('Primary Navigation','title_li='); ?>
+				</nav>
