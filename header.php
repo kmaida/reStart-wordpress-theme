@@ -32,8 +32,8 @@
 
 	</head>
 	<body <?php body_class(); ?>>
-		<div id="wrapper-overflow" class="wrapper-overflow">
-			<div id="wrapper-canvas" class="wrapper-canvas">
+		<div id="wrapper-overflow" class="wrapper-overflow">	<!-- manages overflow for off-canvas elements -->
+			<div id="wrapper-canvas" class="wrapper-canvas">	<!-- manages visible canvas -->
 
 				<header id="header-global" class="header-global">
 					<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo('name'); ?></a></h1>
@@ -44,3 +44,5 @@
 		        	<!-- wp_nav_menu generates a container div with a class of "menu" -->
 					<?php wp_nav_menu('Primary Navigation','title_li='); ?>
 				</nav>
+				
+				<div id="wrapper-content" class="wrapper-content clearfix"> <!-- manages content (main, sidebar, footer) -->

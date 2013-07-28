@@ -51,11 +51,6 @@ b, strong { font-weight: bold; }
 q:lang(en) { quotes: '&#8220;' '&#8221;' '&#8216;' '&#8217;'; }
 article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section { display: block; }
-del { text-decoration: line-through; }
-abbr[title], dfn[title] {
-    border-bottom: 1px dotted;
-    cursor: help;
-}
 
 /*--------------------
 		BASICS
@@ -69,7 +64,7 @@ abbr[title], dfn[title] {
 	height: 0;
 	visibility: hidden;
 }
-	.ie7 .clearfix { zoom: 1; }
+.ie7 .clearfix { zoom: 1; }
 .ir {
 	overflow: hidden;
 	text-indent: 200%;
@@ -79,13 +74,7 @@ body {
 	color: #333;
 	-webkit-font-smoothing: antialiased;
 }
-h1, h2, h3, h4, h5, h6, p {
-	margin-bottom: 16px;
-}
-
-/*---------------------------------------------------------------------------------------- THE BASICS --*/
-
-h1, h2, h3, h4, h5, h6 { padding: 8px 0; }
+h1, h2, h3, h4, h5, h6, p { margin-bottom: 16px; }
 h1 { font-size: 30px; }
 h2 { font-size: 24px; }
 h3 { font-size: 22px; }
@@ -95,6 +84,25 @@ h6 { font-size: 15px; }
 i, em { font-style: italic; }
 b, strong { font-weight: bold; }
 q:lang(en) { quotes: '&#8220;' '&#8221;' "&#8216;" "&#8217;"; }
+blockquote {
+	border-left: 4px solid #ccc;
+	margin: 8px 12px;
+	padding-left: 16px;	
+}
+del {
+	color: #F00;
+	text-decoration: line-through;	
+}
+ins {
+	color: #060;
+}
+abbr[title], dfn[title] {
+	border-bottom: 1px dotted #666;
+	cursor: help;	
+}
+pre, code {
+	font-family: 'Lucida Console', Consolas, 'Courier New';
+}
 
 /*---- Alignment ----*/
 
@@ -110,28 +118,6 @@ q:lang(en) { quotes: '&#8220;' '&#8221;' "&#8216;" "&#8217;"; }
 	display: block;
 	margin: 15px auto;
 	text-align: center;
-}
-
-/*---- Elements ----*/
-
-blockquote {
-	border-left: 4px solid #ccc;
-	margin: 8px 12px;
-	padding-left: 16px;	
-}
-del {
-	color: #F00;
-	text-decoration: line-through;	
-}
-ins {
-	color: #060;
-}
-abbr {
-	border-bottom: 1px dotted #666;
-	cursor: help;	
-}
-pre, code {
-	font-family: 'Lucida Console', Consolas, 'Courier New';
 }
 
 /*---- Links ----*/
@@ -158,7 +144,6 @@ a:active {
 	box-shadow: inset -8px 0 8px -6px rgba(0,0,0,0.2);
 	display: none;	/* deal with FOUC */
 	height: 100%;
-	overflow: hidden;
 	position: absolute;
 		top: 0;
 	-webkit-transform: translate3d(-100%,0,0);
@@ -201,16 +186,12 @@ a:active {
 	
 body {
 	font: normal 16px/1.4 Helvetica, Arial, sans-serif;
-	margin: 0 auto;
-	max-width: 960px;
+}
+.wrapper-content {
+	padding: 0 4%;
 }
 .main {
-	max-width: 960px;
-	padding: 0 15px 10px;
 	position: relative;
-}
-nav {
-	clear: both;
 }
 
 /*---------------------------------------------------------------------------------------- HEADER --*/
@@ -245,6 +226,9 @@ nav {
 		
 /*---- Global Navigation Menu ----*/
 	
+.nav-global {
+	padding: 2% 4%;
+}
 .nav-global a {
 	color: #444;
 	text-decoration: none;
@@ -309,6 +293,9 @@ article.sticky {
 	font-size: 88%;
 	font-style: italic;
 	text-align: center;
+}
+article embed {
+	max-width: 100%;
 }
 
 /*---------------------------------------------------------------------------------------- COMMENTS --*/
@@ -459,8 +446,6 @@ a.page-numbers.prev {
 
 .sidebar-global {
 	clear: both;
-	max-width: 960px;
-	padding: 0 15px 10px;
 	position: relative;
 }
 .sidebar-global li {
@@ -508,11 +493,11 @@ input.search-submit {
 	text-align: center;
 }
 
-/*---------------------------------------------------------------------------------------- CSS3 MEDIA QUERIES --*/
+/*---------------------------------------------------------------------------------------- MEDIA QUERY: LARGE SCREEN --*/
 
 @media screen and (min-width: 640px) {
 		
-	/*-- Layout Function --*/
+/*-- Layout Function --*/
 	
 	.nav-global {
 		display: block;
@@ -541,23 +526,51 @@ input.search-submit {
 		display: none;
 	}
 		
-	/*-- Presentation --*/
+/*-- Presentation --*/
 		
-	.nav-global .menu > ul {
+	/* Navigation */
+	
+	.nav-global {
 		background: #eee;
+		box-shadow: none;
+		margin-bottom: 20px;
+		position: relative;
+		z-index: 99;
 	}
-	.nav-global li {
-		display: inline-block;
+	.nav-global .menu ul:after {
+		clear: both;
+		content: " ";
+		display: block;
+		font-size: 0;
+		height: 0;
+		visibility: hidden;
 	}
+	.ie7 .nav-global .menu ul { zoom: 1; }
+	.nav-global .menu > ul > li {
+		float: left;
+		position: relative;
+	}
+	.nav-global .children {		/* add your code for dropdown navigation here if needed */
+		background: #ccc;
+		position: absolute;
+			left: -9999em;
+		min-width: 150px;
+		z-index: 999;
+	}
+	.nav-global .hasChildren:hover > .children {
+		left: 0;
+	}
+	
+	/* Content */
+	
 	.main {
 		float: left;
-		max-width: 70%;
-		padding: 2% 2% 2% 3%;
+		width: 70%;
+		padding-right: 4%;
 	}	
 	.sidebar-global {
 		clear: none;
 		float: right;
-		margin: 10px 0;
 		width: 30%;
 	}
 	.welcome { display: block; }
