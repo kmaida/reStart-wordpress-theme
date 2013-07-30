@@ -7,14 +7,6 @@
  */
 ?>
 
-<?php ?><?php if ( $wp_query->max_num_pages > 1 ) : // Display navigation to next/previous posts when applicable (above) ?>
-
-	<nav class="nav-above clearfix">
-		<?php get_template_part('nav','archive'); ?>
-	</nav>
-	
-<?php endif; ?><?php ?>
-
 <?php if ( ! have_posts() ) : // If there are no posts to display, such as an empty archive page ?>
 
 	<article class="not-found">
@@ -48,7 +40,3 @@
 	</article>
 
 <?php endwhile; // End the loop ?>
-
-<nav class="nav-below nav-paglinks clearfix">
-    <?php get_template_part('nav','paglinks'); // Paginated links list with page numbers and prev/next links ?>
-</nav>

@@ -26,9 +26,11 @@ var global = {
 			var resizeVideo = function() {
 					$j('article embed').each(function() {
 						var $this = $j(this),
+							// get the dimensions defined by the embed's attributes
 							attrWidth = parseInt($this.attr('width'), 10),
 							attrHeight = parseInt($this.attr('height'), 10),
-							ratio = attrHeight / attrWidth,
+							// recalculate dimensions to match layout size
+							ratio = attrHeight / attrWidth,						
 							width = $this.closest('article').width(),
 							height = width * ratio;
 							
@@ -41,9 +43,9 @@ var global = {
 			/*	This only resizes the video once, when it is initially loaded. 
 				For more advanced responsive functionality, you will need to 
 				poll for resize intervals and reload the entire video while 
-				updating dimensions.
+				updating dimensions. This is not particularly recommended.
 			*/
-				resizeVideo();
+			resizeVideo();
 		});
 	}
 	

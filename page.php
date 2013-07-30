@@ -14,7 +14,7 @@ get_header(); ?>
 				
 				<header class="header-article">
 					<h1 class="title"><?php the_title(); ?></h1>
-					<!-- <p>Posted on <?php the_time('F jS, Y'); ?> by <?php the_author_posts_link(); ?></p> -->
+					<!-- <p>Published on <?php the_time('F jS, Y'); ?> by <?php the_author_posts_link(); ?></p> -->
 				</header>
 				
 				<section class="the-content clearfix">

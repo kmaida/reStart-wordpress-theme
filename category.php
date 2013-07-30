@@ -13,6 +13,7 @@ get_header(); ?>
 			<h1 class="title"><?php
 				printf( __( 'Category Archives: %s', 'reStart' ), '<span>' . single_cat_title( '', false ) . '</span>' );
 			?></h1>
+			
 			<?php
 				$category_description = category_description();
 				if ( ! empty( $category_description ) )
@@ -20,6 +21,12 @@ get_header(); ?>
 			?>
 				
 			<?php get_template_part('loop','category'); ?>
+			
+			<?php if ( $wp_query->max_num_pages > 1 ) : // Display navigation to next/previous posts when applicable ?>
+				<nav class="nav-below nav-paglinks clearfix">
+				    <?php get_template_part('nav','paglinks'); // Paginated links list with page numbers and prev/next links ?>
+				</nav>
+			<?php endif; ?>
 
 		</section>
 

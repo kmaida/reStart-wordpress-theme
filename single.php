@@ -3,7 +3,7 @@
  * The template for displaying single posts.
  *
  * @package WordPress
- * @subpackage KM-H5
+ * @subpackage reStart
 **/
 get_header(); ?>
 
@@ -69,6 +69,7 @@ get_header(); ?>
                 
 			</article>
 			
+			<!-- shows link to previous post and next post by title -->
 			<?php get_template_part('nav','posts'); ?>
 
 			<?php comments_template(); ?>

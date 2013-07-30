@@ -26,15 +26,21 @@ get_header(); ?>
 			
 			<h1 class="title">
 				<?php if ( is_day() ) : ?>
-					<?php printf( __( 'Daily Archives: <span>%s</span>', 'KMH5' ), get_the_date() ); ?>
+					<?php printf( __( 'Daily Archives: <span>%s</span>', 'reStart' ), get_the_date() ); ?>
 				<?php elseif ( is_month() ) : ?>
-					<?php printf( __( 'Monthly Archives: <span>%s</span>', 'KMH5' ), get_the_date( 'F Y' ) ); ?>
+					<?php printf( __( 'Monthly Archives: <span>%s</span>', 'reStart' ), get_the_date( 'F Y' ) ); ?>
 				<?php elseif ( is_year() ) : ?>
-					<?php printf( __( 'Yearly Archives: <span>%s</span>', 'KMH5' ), get_the_date( 'Y' ) ); ?>
+					<?php printf( __( 'Yearly Archives: <span>%s</span>', 'reStart' ), get_the_date( 'Y' ) ); ?>
 				<?php else : ?>
-					<?php _e( 'Archives', 'KMH5' ); ?>
+					<?php _e( 'Archives', 'reStart' ); ?>
 				<?php endif; ?>
 			</h1>
+			
+			<?php if ( $wp_query->max_num_pages > 1 ) : // Display navigation to next/previous posts when applicable (above) ?>
+				<nav class="nav-above clearfix">
+					<?php get_template_part('nav','archive'); ?>
+				</nav>	
+			<?php endif; ?>
 			
 			<?php
 				/* Since we called the_post() above, we need to
@@ -42,12 +48,13 @@ get_header(); ?>
 				 * we can run the loop properly, in full.
 				 */
 				rewind_posts();
-			
-				/* Run the loop for the archives page to output the posts.
-				 * If you want to overload this in a child theme then include a file
-				 * called loop-archive.php and that will be used instead.
-				 */
 				get_template_part('loop','archive');
+				
+				<?php if ( $wp_query->max_num_pages > 1 ) : // Display navigation to next/previous posts when applicable (above) ?>
+					<nav class="nav-below nav-paglinks clearfix">
+					    <?php get_template_part('nav','paglinks'); // Paginated links list with page numbers and prev/next links ?>
+					</nav>
+				<?php endif; ?>
 			?>
 
 	</section>
