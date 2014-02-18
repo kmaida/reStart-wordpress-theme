@@ -5,8 +5,26 @@ var $j = jQuery.noConflict();
 var global = {
 
 	init: function() {
+		global.fixBrowsers();
 		global.navClasses();
 		global.embeds();
+	},
+	
+	fixBrowsers: function() {
+		var ua = navigator.userAgent.toLowerCase(),
+		    chrome = ua.lastIndexOf('chrome/') > 0,
+		    $html = $j('html');
+		
+		// Modernizr 2 bug: Chrome on Windows 8 gives a false negative for transforms3d support
+		// Google does not plan to fix this; https://code.google.com/p/chromium/issues/detail?id=129004
+		if (chrome) {
+		    var chromeversion = ua.substr(ua.lastIndexOf('chrome/') + 7, 2);
+		    if (chromeversion >= 12 && $html.hasClass('no-csstransforms3d')) {
+		        $html
+		            .removeClass('no-csstransforms3d')
+		            .addClass('csstransforms3d');
+		    }
+		}
 	},
 	
 	navClasses: function() {
