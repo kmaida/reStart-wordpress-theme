@@ -517,7 +517,8 @@ input.search-submit {
 		-o-transform: none;
 		transform: none;
 	}
-	.no-csstransforms3d .nav-open .wrapper-canvas {
+	.no-csstransforms3d .nav-open .wrapper-canvas,
+	.no-csstransforms3d .nav-open .nav-global {
 		left: 0;
 	}
 	.nav-toggle {
