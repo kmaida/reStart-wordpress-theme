@@ -155,7 +155,7 @@ a:active {
 	display: block;	/* deal with FOUC */
 }
 	.no-csstransforms3d .nav-closed .nav-global { left: -100%; }
-	.no-csstransforms3d .nav-open .nav-global { left: 0; }
+	.no-csstransforms3d .nav-open .nav-global { left: -85%; }
 .wrapper-canvas {
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
